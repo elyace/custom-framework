@@ -1,0 +1,10 @@
+var/**
+vendor/
+composer.phar
+composer.lock
+public/**
+!public/index.php
+
+assets/node_modules
+assets/yarn.lock
+.idea

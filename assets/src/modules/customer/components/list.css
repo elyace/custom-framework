@@ -1,0 +1,7 @@
+#customer-list .deleting {
+    background-color: #f7d9d9;
+}
+
+#customer-list .customer-list__empty {
+    text-align: center;
+}

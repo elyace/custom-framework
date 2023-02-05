@@ -1,0 +1,5 @@
+#login-form {
+    width: 439px;
+    border: solid 1px var(--secondary-lite-color);
+    padding: 25px;
+}

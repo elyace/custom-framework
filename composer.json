@@ -1,0 +1,26 @@
+{
+    "name": "elyace/custom-frm",
+    "description": "Custom Framework using Vite",
+    "type": "project",
+    "require": {
+        "nyholm/psr7": "^1.5",
+        "nyholm/psr7-server": "^1.0",
+        "slim/slim": "4.*",
+        "spatie/laravel-blade": "^1.0",
+        "vlucas/phpdotenv": "^5.5",
+        "php-di/php-di": "^7.0",
+        "php-di/slim-bridge": "^3.3",
+        "symfony/password-hasher": "^6.2"
+    },
+    "require-dev": {
+        "symfony/var-dumper": "^6.2"
+    },
+    "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "CFM\\": "src/",
+            "Module\\": "modules/",
+            "Persistence\\": "persistence/"
+        }
+    }
+}
