@@ -44,7 +44,7 @@ final class CustomerLoginController extends AbstractController
             }
         }
 
-        $view = $this->template->make('auth.login');
+        $view = $this->render('auth.login');
 
         return $this->successResponse($view->render());
     }

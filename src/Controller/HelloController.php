@@ -10,7 +10,7 @@ final class HelloController extends AbstractController
 
     public function __invoke(Request $request, array $args = []): Response
     {
-        $view = $this->template->make('hello');
+        $view = $this->render('hello');
 
         return $this->successResponse(
             $view->render()

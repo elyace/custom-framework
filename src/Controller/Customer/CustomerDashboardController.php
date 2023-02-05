@@ -19,7 +19,7 @@ final class CustomerDashboardController extends AbstractController
     public function __invoke(ServerRequestInterface $request, array $args = []): ResponseInterface
     {
         $customer = $this->customerProviderRepository->findCurrentCustomer();
-        $view = $this->template->make('customer.dashboard', [
+        $view = $this->render('customer.dashboard', [
             'customer' => $customer
         ]);
 

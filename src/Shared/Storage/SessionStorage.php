@@ -32,5 +32,7 @@ class SessionStorage implements KeyValueStorageInterface
     public function flush(): KeyValueStorageInterface
     {
         session_destroy();
+
+        return $this;
     }
 }

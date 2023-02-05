@@ -16,7 +16,7 @@ final class CustomerListController extends AbstractController
     public function __invoke(RequestInterface $request, array $args = []): ResponseInterface
     {
         $customers = $this->listCustomer->execute();
-        $view = $this->template->make('customer.list', [
+        $view = $this->render('customer.list', [
             'customers' => $customers
         ]);
 
