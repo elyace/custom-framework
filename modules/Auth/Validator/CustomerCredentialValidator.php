@@ -17,8 +17,8 @@ class CustomerCredentialValidator implements CustomerCredentialValidatorInterfac
     {
         try {
             Assertion::notBlank($credentials->login, message: 'Password can not be blank');
-            Assertion::notBlank($credentials->login, 'Login can not be blank');
-            Assertion::email($credentials->login, 'Login must be a valid email');
+            Assertion::notBlank($credentials->login, message: 'Login can not be blank');
+            Assertion::email($credentials->login, message: 'Login must be a valid email');
         } catch (AssertionFailedException $e) {
             throw new InvalidCustomerCredentials($e->getMessage());
         }
