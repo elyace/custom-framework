@@ -7,6 +7,7 @@ use Module\Auth\Data\AuthenticatedCustomer;
 use Module\Auth\Data\CustomerCredentials;
 use Module\Auth\Exception\InvalidCustomerCredentials;
 use Module\Auth\Repository\CustomerRepositoryInterface;
+use Module\Auth\Validator\CustomerCredentialValidatorInterface;
 use Symfony\Component\PasswordHasher\PasswordHasherInterface;
 
 final class CustomerLogin
@@ -14,7 +15,8 @@ final class CustomerLogin
 
     public function __construct(
         readonly private CustomerRepositoryInterface $customerRepository,
-        readonly private PasswordHasherInterface $passwordChecker
+        readonly private PasswordHasherInterface $passwordChecker,
+        readonly private CustomerCredentialValidatorInterface $validator
     )
     {
     }
@@ -24,6 +26,9 @@ final class CustomerLogin
      */
     public function execute(CustomerCredentials $credentials): AuthenticatedCustomer
     {
+
+        $this->validator->validate($credentials);
+
         $customer = $this->customerRepository->findByLogin($credentials->login);
 
         if( null === $customer )
