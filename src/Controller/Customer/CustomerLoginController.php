@@ -8,7 +8,7 @@ use CFM\Event\ModuleExceptionEvent;
 use Module\Auth\Data\CustomerCredentials;
 use Module\Auth\Exception\InvalidCustomerCredentials;
 use Module\Auth\Repository\CustomerProviderRepositoryInterface;
-use Module\Auth\UseCases\CustomerLogin;
+use Module\Auth\UseCases\CustomerAuthenticator;
 use Psr\Http\Message\RequestInterface;
 use Psr\Http\Message\ResponseInterface;
 
@@ -16,7 +16,7 @@ final class CustomerLoginController extends AbstractController
 {
 
     public function __construct(
-        private readonly CustomerLogin                       $customerLogin,
+        private readonly CustomerAuthenticator               $customerLogin,
         private readonly CustomerProviderRepositoryInterface $customerProviderRepository
     )
     {

@@ -1,10 +1,7 @@
 <?php
-
-if( !defined('ROOT_PATH') ) define('ROOT_PATH', realpath(__DIR__ . '/../'));
-if( !defined('CONFIG_PATH') ) define('CONFIG_PATH', realpath(__DIR__ . '/../config'));
-
 use CFM\Kernel;
 
+require __DIR__ . '/../config/defines.php';
 require __DIR__ . '/../vendor/autoload.php';
 
 $dotenv = Dotenv\Dotenv::createImmutable(realpath(__DIR__ . '/../'));
