@@ -15,7 +15,8 @@ abstract class AbstractController
 
     private readonly Environment $template;
 
-    private readonly FlashMessageManagerInterface $storage;
+    #[Inject]
+    protected FlashMessageManagerInterface $storage;
 
     abstract public function __invoke(ServerRequestInterface $request, array $args = []);
 
@@ -30,14 +31,6 @@ abstract class AbstractController
         return $this;
     }
 
-    #[Inject]
-    public function setStorage(FlashMessageManagerInterface $storage): static
-    {
-        $this->storage = $storage;
-
-        return $this;
-    }
-
     public function render(string $view, array $data = []): View
     {
         $this->template->share('notifications', $this->storage->read());
@@ -48,5 +41,13 @@ abstract class AbstractController
     protected function successResponse(string $body): ResponseInterface
     {
         return new Response(200, [], $body);
+    }
+
+    protected function successJsonResponse(array $data): ResponseInterface
+    {
+        return $this->successResponse(json_encode([
+            'success' => true,
+            'content' => $data
+        ]));
     }
 }
