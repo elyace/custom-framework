@@ -8,7 +8,6 @@ use CFM\Shared\Data\Route;
 use CFM\Shared\Event\EventManager;
 use CFM\Shared\Event\EventManagerInterface;
 use CFM\Shared\Factory\TemplateEnvFactory;
-use CFM\Shared\Storage\KeyValueStorageInterface;
 use DI\Bridge\Slim\Bridge;
 use DI\Container;
 use DI\ContainerBuilder;

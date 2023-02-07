@@ -1,5 +1,8 @@
 <?php
 
+namespace modules;
+
+use BaseTest;
 use Module\Auth\UseCases\CustomerAuthenticator;
 
 class CustomerAuthenticatorIntegrationTest extends BaseTest
