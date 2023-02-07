@@ -44,7 +44,9 @@ final class CustomerLoginController extends AbstractController
             }
         }
 
-        $view = $this->render('auth.login');
+        $view = $this->render('auth.login', [
+            'registerUrl' => '/customer-register'
+        ]);
 
         return $this->successResponse($view->render());
     }
