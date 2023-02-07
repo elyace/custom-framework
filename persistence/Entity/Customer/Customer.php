@@ -3,8 +3,9 @@
 namespace Persistence\Entity\Customer;
 
 use Doctrine\ORM\Mapping as ORM;
+use Persistence\Repository\Customer\CustomerRepository;
 
-#[ORM\Entity]
+#[ORM\Entity(repositoryClass: CustomerRepository::class)]
 #[ORM\Table(name: 'customers')]
 class Customer
 {

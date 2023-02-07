@@ -26,3 +26,19 @@ if( !function_exists('redirect') ) {
         exit();
     }
 }
+
+if( !function_exists('camel_to_snake') )
+{
+    function camel_to_snake($input): string
+    {
+        return strtolower(preg_replace('/(?<!^)[A-Z]/', '_$0', $input));
+    }
+}
+
+if( !function_exists('snake_to_camel') )
+{
+    function snake_to_camel($input): string
+    {
+        return lcfirst(str_replace(' ', '', ucwords(str_replace('_', ' ', $input))));
+    }
+}

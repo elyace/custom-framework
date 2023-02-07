@@ -22,7 +22,7 @@ final class CustomerSeeder implements SeederInterface
             $customerEntity->setEmail($customer['email']);
             $customerEntity->setFirstName($customer['first_name']);
             $customerEntity->setLastname($customer['last_name']);
-            $customerEntity->setPassword('$2a$12$OUfR0PjWpSvDCFkxuibzjeeolXPwPJiaFMIarQUYvFSg3DMUPSULq');
+            $customerEntity->setPassword('$2a$12$OUfR0PjWpSvDCFkxuibzjeeolXPwPJiaFMIarQUYvFSg3DMUPSULq'); // password
             $manager->persist($customerEntity);
         }
 

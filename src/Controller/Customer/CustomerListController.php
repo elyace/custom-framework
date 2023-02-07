@@ -3,12 +3,13 @@
 namespace CFM\Controller\Customer;
 
 use CFM\Controller\AbstractController;
+use CFM\Presenter\Customer\CustomerPresenterFactory;
 use CFM\Shared\Attribute\Security;
 use Module\Customer\UseCases\ListCustomer;
 use Psr\Http\Message\RequestInterface;
 use Psr\Http\Message\ResponseInterface;
 
-#[Security(Security::SECURE)]
+#[Security(Security::UNSECURE)]
 final class CustomerListController extends AbstractController
 {
     public function __construct(readonly private ListCustomer $listCustomer){}
@@ -16,8 +17,9 @@ final class CustomerListController extends AbstractController
     public function __invoke(RequestInterface $request, array $args = []): ResponseInterface
     {
         $customers = $this->listCustomer->execute();
+        $customerPresenters = CustomerPresenterFactory::makeCollectionFromEntities($customers);
         $view = $this->render('customer.list', [
-            'customers' => $customers
+            'customers' => $customerPresenters
         ]);
 
         return $this->successResponse($view->render());
