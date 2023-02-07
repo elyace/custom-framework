@@ -34,7 +34,7 @@ final class EntityManagerFactory
     public function create(): EntityManagerInterface
     {
         $config = ORMSetup::createAttributeMetadataConfiguration(
-            paths: array(ROOT_PATH . 'persistence/Entity'),
+            paths: array(ROOT_PATH . '/persistence/Entity'),
             isDevMode: 'dev' === env('APP_ENV'),
         );
         $connectionConfig = require CONFIG_PATH . '/doctrine.php';

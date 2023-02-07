@@ -1,6 +1,7 @@
 #!/usr/bin/env php
 <?php
 
+use CFM\Command\SeederRunnerCommand;
 use CFM\Shared\Doctrine\EntityManagerFactory;
 use Doctrine\ORM\Tools\Console\ConsoleRunner;
 use Doctrine\ORM\Tools\Console\EntityManagerProvider\SingleManagerProvider;
@@ -8,6 +9,9 @@ use Doctrine\ORM\Tools\Console\EntityManagerProvider\SingleManagerProvider;
 require_once __DIR__ . '/../src/bootstrap.php';
 
 $entityManager = EntityManagerFactory::getInstance()->create();
+
 ConsoleRunner::run(
-    new SingleManagerProvider($entityManager)
+    new SingleManagerProvider($entityManager),
+    [new SeederRunnerCommand($entityManager)]
 );
+$entityManager->getConnection()->close();
