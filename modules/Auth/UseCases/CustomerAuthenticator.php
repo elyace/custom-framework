@@ -29,7 +29,7 @@ final class CustomerAuthenticator
 
         $this->validator->validate($credentials);
 
-        $customer = $this->customerRepository->findByLogin($credentials->login);
+        $customer = $this->customerRepository->getOneByLogin($credentials->login);
 
         if( null === $customer )
         {
@@ -41,6 +41,11 @@ final class CustomerAuthenticator
             throw new InvalidCustomerCredentials("Invalid credentials");
         }
 
-        return new AuthenticatedCustomer($customer, new DateTimeImmutable('now'));
+        return new AuthenticatedCustomer(
+            $customer->firstName,
+            $customer->lastName,
+            $customer->email,
+            $customer->address,
+            new DateTimeImmutable('now'));
     }
 }

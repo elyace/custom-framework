@@ -48,7 +48,7 @@ class CustomerAuthenticatorTest extends BaseTest
             ->with($credentials);
 
         $this->customerRepository->expects($this->once())
-            ->method('findByLogin')
+            ->method('getOneByLogin')
             ->with("testuser")
             ->willReturn($customer);
 
@@ -73,7 +73,7 @@ class CustomerAuthenticatorTest extends BaseTest
             ->with($credentials);
 
         $this->customerRepository->expects($this->once())
-            ->method('findByLogin')
+            ->method('getOneByLogin')
             ->with("nonexistentuser")
             ->willReturn(null);
 
@@ -98,7 +98,7 @@ class CustomerAuthenticatorTest extends BaseTest
             ->willReturn(false);
 
         $this->customerRepository->expects($this->once())
-            ->method('findByLogin')
+            ->method('getOneByLogin')
             ->with("user")
             ->willReturn($customer);
 

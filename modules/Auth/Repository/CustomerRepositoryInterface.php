@@ -6,5 +6,5 @@ use Module\Auth\Data\Customer;
 
 interface CustomerRepositoryInterface
 {
-    public function findByLogin(string $login): ?Customer;
+    public function getOneByLogin(string $login): ?Customer;
 }

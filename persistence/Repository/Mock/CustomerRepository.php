@@ -8,7 +8,7 @@ use Module\Auth\Repository\CustomerRepositoryInterface;
 final class CustomerRepository implements CustomerRepositoryInterface
 {
 
-    public function findByLogin(string $login): ?Customer
+    public function getOneByLogin(string $login): ?Customer
     {
         return new Customer($login, '$2a$12$OUfR0PjWpSvDCFkxuibzjeeolXPwPJiaFMIarQUYvFSg3DMUPSULq');
     }

@@ -3,6 +3,7 @@
 namespace Persistence\Repository\Customer;
 
 use Doctrine\ORM\EntityRepository;
+use Doctrine\ORM\NonUniqueResultException;
 use Module\Auth\Data\Customer;
 use Module\Auth\Repository\CustomerRepositoryInterface;
 use Module\Customer\Repository\CustomerListRepositoryInterface;
@@ -15,13 +16,28 @@ class CustomerRepository extends EntityRepository implements CustomerListReposit
         return $this->findAll();
     }
 
-    public function findByLogin(string $login): ?Customer
+    /**
+     * @throws NonUniqueResultException
+     */
+    public function getOneByLogin(string $login): ?Customer
     {
         /** @var \Persistence\Entity\Customer\Customer $customer */
-        $customer = $this->findOneBy(['login', $login]);
+        $customer = $this->createQueryBuilder('c')
+            ->where('c.email = :login')
+            ->setParameter('login', $login)
+            ->getQuery()
+            ->getOneOrNullResult();
+
         if( null !== $customer )
         {
-            return new Customer($customer->getEmail(), $customer->getPassword());
+            return new Customer(
+                $customer->getFirstName(),
+                $customer->getLastname(),
+                $customer->getEmail(),
+                '-',
+                $customer->getEmail(),
+                $customer->getPassword()
+            );
         }
 
         return null;
