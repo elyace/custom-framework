@@ -8,3 +8,4 @@ public/**
 assets/node_modules
 assets/yarn.lock
 .idea
+.phpunit.result.cache

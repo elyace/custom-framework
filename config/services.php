@@ -13,6 +13,7 @@ use Symfony\Component\PasswordHasher\Hasher\PasswordHasherFactory;
 use Symfony\Component\PasswordHasher\PasswordHasherInterface;
 
 $repositories = require_once __DIR__ . '/repositories/customer.php';
+$modules = require_once __DIR__ . '/repositories/modules.php';
 
 return [
     AssetManagerInterface::class => DI\create(AssetManager::class),
@@ -32,5 +33,6 @@ return [
         $session = $container->get(SessionStorage::class);
         return new FlashMessageManager($session);
     }),
-    ...$repositories
+    ...$repositories,
+    ...$modules,
 ];

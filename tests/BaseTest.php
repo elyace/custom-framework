@@ -25,4 +25,9 @@ class BaseTest extends TestCase
         $this->container = $builder->build();
         parent::__construct($name);
     }
+
+    public function testValidContainer()
+    {
+        self::assertInstanceOf(ContainerInterface::class, $this->container);
+    }
 }
