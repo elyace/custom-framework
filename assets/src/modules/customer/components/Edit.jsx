@@ -7,7 +7,7 @@ import './edit.css'
 
 const Edit = () => {
 
-    const [customer, save] = useCustomerEdit()
+    const {customer, save} = useCustomerEdit()
 
     const { register, handleSubmit, formState: {isDirty} } = useForm({
         values: customer

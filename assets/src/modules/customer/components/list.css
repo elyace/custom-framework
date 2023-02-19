@@ -1,5 +1,11 @@
 #customer-list .deleting {
     background-color: #f7d9d9;
+    transition: background-color 500ms ease;
+}
+
+#customer-list .editing {
+    background-color: var(--secondary-lite-color);
+    transition: background-color 500ms ease;
 }
 
 #customer-list .customer-list__empty {

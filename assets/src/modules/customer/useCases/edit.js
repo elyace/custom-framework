@@ -1,7 +1,9 @@
 import {useDispatch, useSelector} from "react-redux";
 import {set} from "../actions/editActions.js";
 import {addCustomer, removeCustomer} from "../actions/listActions.js";
-import {publish} from "../../../shared/event.js";
+import {publish, subscribe} from "../../../shared/event.js";
+import React, {useEffect} from "react";
+import {purge} from "../actions/toDeleteActions.js";
 
 const useCustomerEdit = () => {
     const customer = useSelector(state => state.customer.edit.value)
@@ -14,7 +16,29 @@ const useCustomerEdit = () => {
         publish('updated-customer', customer)
     }
 
-    return [ customer, save ]
+    useEffect( () => {
+        subscribe('hide-side-tools', () => {
+            dispatch(set(undefined))
+        })
+    }, [])
+
+    const edit = customerToEdit => {
+        if ( customer && customer.id === customerToEdit.id) {
+            publish('hide-side-tools')
+
+            return
+        }
+        dispatch(purge())
+        publish('release-delete-btn')
+        dispatch(set(customerToEdit))
+        publish('show-side-tools', React.lazy(() => import('./../components/Edit')))
+    }
+
+    const onEdit = customerToEdit => {
+        return customer && customer.id === customerToEdit.id
+    }
+
+    return {customer, save, edit, onEdit}
 }
 
 export default useCustomerEdit

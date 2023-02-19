@@ -1,5 +1,5 @@
 import React, {Suspense, useEffect, useState} from 'react'
-import {subscribe} from "../../shared/event.js";
+import {publish, subscribe} from "../../shared/event.js";
 import {BsFillArrowRightCircleFill} from "react-icons/bs";
 
 import './side-tools.css'
@@ -29,7 +29,7 @@ const SideTools = () => {
             <span className="close-bg"></span>
             <a href="" className='close' onClick={(e) => {
                 e.preventDefault()
-                setShow(false)
+                publish('hide-side-tools')
             }}>
                 <BsFillArrowRightCircleFill/>
             </a>

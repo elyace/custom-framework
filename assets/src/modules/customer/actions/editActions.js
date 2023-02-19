@@ -7,6 +7,7 @@ export const editActions = createSlice({
     },
     reducers: {
         set: (state, action) => {
+
             state.value = action.payload // expecting payload to be customer
         }
     }

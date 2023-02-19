@@ -7,8 +7,8 @@
     {{ html_entity_decode($assets)  }}
 </head>
 <body class="h-100" style="overflow-x: hidden">
-    <div id="notifications"></div>
-    <div id="tools"></div>
+    <toast-notification></toast-notification>
+    <tools-container></tools-container>
     <div class="container h-100">
         <div>
             @foreach($notifications as $notification)

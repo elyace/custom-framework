@@ -7,6 +7,7 @@ import {removeCustomer} from "../actions/listActions.js";
 const useCustomerDelete = () => {
 
     const lines = useSelector( state => state.customer.toDelete.value )
+    const customers = useSelector(state => state.customer.list.value)
 
     const dispatch = useDispatch()
 
@@ -16,6 +17,14 @@ const useCustomerDelete = () => {
             publish('freeze-delete-btn')
         }
     }, [lines.length])
+
+    const deleteCustomer = id => {
+        const removedCustomer = customers.find(customer => customer.id === id)
+        dispatch(removeCustomer(id))
+        publish('removed-customer', removedCustomer)
+
+        // then update backend logic ...
+    }
 
     const deleteCustomers = () => {
         publish('release-delete-btn')
@@ -42,7 +51,7 @@ const useCustomerDelete = () => {
         return lines.includes(customer.id)
     }
 
-    return {lines, deleteCustomers, cancelSelection, addCustomerToDelete, removeCustomerToDelete, aboutToBeDeleted}
+    return {lines, deleteCustomer, deleteCustomers, cancelSelection, addCustomerToDelete, removeCustomerToDelete, aboutToBeDeleted}
 }
 
 export default useCustomerDelete

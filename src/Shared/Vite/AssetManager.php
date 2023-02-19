@@ -10,6 +10,7 @@ final class AssetManager implements AssetManagerInterface
         $host = env('VITE_HOST_DEV');
 
         return <<<ASSETS
+        <link rel="stylesheet" type="text/css" href="http://{$host}/src/assets/main.css"/>
         <script type="module" src="http://{$host}/@vite/client"></script>
         <script type="module" src="http://{$host}/src/main.jsx"></script>
 ASSETS;
@@ -32,7 +33,7 @@ ASSETS;
         foreach ($assets as $asset) {
             if( str_contains($asset, '.css') ) {
                 $styles[] = <<<CSS
-                    <link rel="stylesheet" href="{$asset}">
+                    <link rel="stylesheet" type="text/css" href="{$asset}">
 CSS;
             }
             if( str_contains($asset, '.js') ) {

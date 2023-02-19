@@ -5,6 +5,7 @@ import {BsPencilSquare} from "react-icons/bs";
 import {withStoreProvider} from "../../store/storeProvider.jsx";
 import useCustomerDelete from "../useCases/delete.js";
 import DeleteSelection from "./Delete.jsx";
+import useCustomerEdit from "../useCases/edit.js";
 
 import './list.css'
 
@@ -15,12 +16,12 @@ import './list.css'
  */
 const CustomerList = () => {
 
-    const [customers, remove, edit] = useCustomerList()
+    const {customers} = useCustomerList()
+    const {edit, onEdit} = useCustomerEdit()
+    const {aboutToBeDeleted, addCustomerToDelete, removeCustomerToDelete, deleteCustomer} = useCustomerDelete()
 
-    const {aboutToBeDeleted, addCustomerToDelete, removeCustomerToDelete} = useCustomerDelete()
-
-    return <>
-        <table className="table" id='customer-list'>
+    return <div id="customer-list">
+        <table className="table">
             <thead>
             <tr>
                 <th>&nbsp;</th>
@@ -47,7 +48,7 @@ const CustomerList = () => {
                     .map(customer => (
                         <tr
                             key={customer.id}
-                            className={`${ aboutToBeDeleted(customer) ? 'deleting':'' }`}
+                            className={`${ aboutToBeDeleted(customer) ? 'deleting':'' }${ onEdit(customer) ? 'editing':'' }`}
                         >
                             <td>#{customer.id}</td>
                             <td>{customer.first_name}</td>
@@ -58,11 +59,16 @@ const CustomerList = () => {
                                 <button className="btn btn-outline-primary mx-2" onClick={ () => edit(customer) } >
                                     <BsPencilSquare/>
                                 </button>
-                                <DeleteButton
-                                    processDelete={() => remove(customer.id)}
-                                    onStartDeleting={ () => addCustomerToDelete(customer) }
-                                    onEndDeleting={ () => removeCustomerToDelete(customer) }
-                                >Supprimer</DeleteButton>
+                                {
+                                    !onEdit(customer) &&
+                                    <DeleteButton
+                                        processDelete={() => deleteCustomer(customer.id)}
+                                        onStartDeleting={ () => addCustomerToDelete(customer) }
+                                        onEndDeleting={ () => removeCustomerToDelete(customer) }
+                                    >
+                                        Supprimer
+                                    </DeleteButton>
+                                }
                             </td>
                         </tr>
                     ))
@@ -70,7 +76,7 @@ const CustomerList = () => {
             </tbody>
         </table>
         <DeleteSelection/>
-    </>
+    </div>
 }
 
 export default withStoreProvider(CustomerList)

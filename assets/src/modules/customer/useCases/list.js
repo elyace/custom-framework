@@ -1,9 +1,8 @@
-import {useDispatch, useSelector} from "react-redux";
-import React, {useEffect} from "react";
-import {addCustomer, initCustomers, removeCustomer} from "../actions/listActions.js";
-import {publish, subscribe} from "../../../shared/event.js";
-import {set} from "../actions/editActions.js";
-import CustomerList from "../queries/htttp/customerList.js";
+import {useDispatch, useSelector} from "react-redux"
+import React, {useEffect} from "react"
+import {addCustomer, initCustomers} from "../actions/listActions.js"
+import {publish, subscribe} from "../../../shared/event.js"
+import CustomerList from "../queries/htttp/customerList.js"
 
 /**
  * Here we are making sync between state changes logic and data persist logic
@@ -14,8 +13,6 @@ import CustomerList from "../queries/htttp/customerList.js";
 const useCustomerList = () => {
 
     const customers = useSelector(state => state.customer.list.value)
-
-    const customerToEdit = useSelector(state => state.customer.edit.value)
 
     const dispatch = useDispatch()
 
@@ -39,26 +36,7 @@ const useCustomerList = () => {
 
     }, [])
 
-    const remove = id => {
-        const removedCustomer = customers.find(customer => customer.id === id)
-        dispatch(removeCustomer(id))
-        publish('removed-customer', removedCustomer)
-
-        // then update backend logic ...
-    }
-
-    const edit = customer => {
-
-        if (customerToEdit && customer.id === customerToEdit.id) {
-            publish('hide-side-tools')
-            return
-        }
-
-        dispatch(set(customer))
-        publish('show-side-tools', React.lazy(() => import('./../components/Edit')))
-    }
-
-    return [customers, remove, edit]
+    return {customers}
 }
 
 export {useCustomerList}
