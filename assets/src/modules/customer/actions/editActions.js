@@ -1,7 +1,7 @@
 import {createSlice} from "@reduxjs/toolkit";
 
 export const editActions = createSlice({
-    name: 'customerEdit',
+    name: 'edit',
     initialState: {
         value: undefined
     },

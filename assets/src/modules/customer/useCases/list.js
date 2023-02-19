@@ -13,21 +13,23 @@ import CustomerList from "../queries/htttp/customerList.js";
  */
 const useCustomerList = () => {
 
-    const customers = useSelector( state => state.customer.list.value )
+    const customers = useSelector(state => state.customer.list.value)
+
+    const customerToEdit = useSelector(state => state.customer.edit.value)
 
     const dispatch = useDispatch()
 
-    useEffect( () => {
+    useEffect(() => {
         const fetchCustomers = async () => {
             const customers = await CustomerList.findAll()
-            dispatch( initCustomers(customers) )
+            dispatch(initCustomers(customers))
         }
 
-        fetchCustomers().then( () => publish('initiated-customer-list') )
+        fetchCustomers().then(() => publish('initiated-customer-list'))
 
     }, [])
 
-    useEffect( () => {
+    useEffect(() => {
 
         subscribe('undo-customer-remove', e => {
             dispatch(addCustomer(e.detail))
@@ -35,22 +37,28 @@ const useCustomerList = () => {
             // then update backend logic ...
         })
 
-    }, [] )
+    }, [])
 
     const remove = id => {
-        const removedCustomer = customers.find( customer => customer.id === id )
-        dispatch( removeCustomer(id) )
+        const removedCustomer = customers.find(customer => customer.id === id)
+        dispatch(removeCustomer(id))
         publish('removed-customer', removedCustomer)
 
         // then update backend logic ...
     }
 
     const edit = customer => {
+
+        if (customerToEdit && customer.id === customerToEdit.id) {
+            publish('hide-side-tools')
+            return
+        }
+
         dispatch(set(customer))
-        publish('show-side-tools', React.lazy( () => import('./../components/Edit') ))
+        publish('show-side-tools', React.lazy(() => import('./../components/Edit')))
     }
 
     return [customers, remove, edit]
 }
 
-export { useCustomerList }
+export {useCustomerList}

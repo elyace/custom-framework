@@ -1,25 +1,10 @@
 import React from 'react'
-import ReactDOM from 'react-dom/client'
-import roots from './shared/componentHooks.jsx'
-
-import 'bootstrap/dist/css/bootstrap.min.css';
+import ToastNotification from "./shared/elements/toastNotification.jsx";
+import ToolsContainer from "./shared/elements/toolsContainer.jsx";
+import 'bootstrap/dist/css/bootstrap.min.css'
 import './assets/main.css'
 
-import { boot } from './bootstrap'
+import './bootstrap'
 
-roots.map(root => {
-    const element = document.getElementById(root.id);
-    if (null !== element) {
-
-        const Component = root.component
-        return ReactDOM.createRoot(element).render(
-            <React.StrictMode>
-                <Component/>
-            </React.StrictMode>
-        )
-
-    }
-
-})
-
-boot();
+window.customElements.define('toast-notification', ToastNotification)
+window.customElements.define('tools-container', ToolsContainer)

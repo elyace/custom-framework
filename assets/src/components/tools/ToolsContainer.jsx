@@ -3,9 +3,9 @@ import SideTools from "./SideTools.jsx";
 
 const ToolsContainer = () => {
 
-    return <>
+    return <div id="tools">
         <SideTools/>
-    </>
+    </div>
 }
 
 export default ToolsContainer

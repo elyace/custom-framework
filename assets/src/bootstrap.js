@@ -1,6 +1,2 @@
-import initCustomers from "./modules/customer/init.jsx";
-import './modules/error/subscriber/httpQueryErrorSubscriber.jsx'
-
-export function boot() {
-    initCustomers()
-}
+import './modules/error/subscriber/httpQueryErrorSubscriber'
+import './modules/customer/init'

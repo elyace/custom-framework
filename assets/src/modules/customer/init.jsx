@@ -1,10 +1,4 @@
-import React from "react";
-import ReactDOM from "react-dom/client";
-import CustomerList from "./components/List.jsx";
-
 import './subscriber/customerEventSubscriber.jsx'
+import CustomerList from "./element/CustomerList.jsx";
 
-export default async function initCustomers() {
-
-    ReactDOM.createRoot(document.getElementById('customer-list')).render(<CustomerList/>)
-}
+window.customElements.define('customer-list', CustomerList)
