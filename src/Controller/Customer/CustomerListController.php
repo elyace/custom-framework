@@ -17,7 +17,7 @@ final class CustomerListController extends AbstractController
     public function __invoke(RequestInterface $request, array $args = []): ResponseInterface
     {
         $customers = $this->listCustomer->execute();
-        $customerPresenters = CustomerPresenterFactory::makeCollectionFromEntities($customers);
+        $customerPresenters = CustomerPresenterFactory::makeCollection($customers);
         $view = $this->render('customer.list', [
             'customers' => $customerPresenters
         ]);

@@ -3,7 +3,9 @@ import {createSlice} from "@reduxjs/toolkit";
 export const listActions = createSlice({
     name: 'customers',
     initialState: {
-        value: []
+        value: [],
+        page: 1,
+        perPage: 10
     },
     reducers: {
         removeCustomer: (state, action) => {
