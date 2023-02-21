@@ -6,9 +6,9 @@ import {withStoreProvider} from "../../store/storeProvider.jsx";
 import useCustomerDelete from "../useCases/delete.js";
 import DeleteSelection from "./Delete.jsx";
 import useCustomerEdit from "../useCases/edit.js";
+import Paginator from "./Paginator.jsx";
 
 import './list.css'
-import Paginator from "./Paginator.jsx";
 
 /**
  *
@@ -19,7 +19,7 @@ const CustomerList = () => {
 
     const {customers} = useCustomerList()
     const {edit, onEdit} = useCustomerEdit()
-    const {aboutToBeDeleted, addCustomerToDelete, removeCustomerToDelete, deleteCustomer} = useCustomerDelete()
+    const {aboutToBeDeleted, addCustomerToDelete, removeCustomerToDelete, deleteCustomer, hasSelection} = useCustomerDelete()
 
     return <div id="customer-list">
         <table className="table">
@@ -77,7 +77,9 @@ const CustomerList = () => {
             </tbody>
         </table>
         <DeleteSelection/>
-        <Paginator/>
+        {
+            !hasSelection() && <Paginator/>
+        }
     </div>
 }
 

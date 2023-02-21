@@ -56,7 +56,9 @@ const useCustomerDelete = () => {
         return lines.includes(customer.id)
     }
 
-    return {lines, deleteCustomer, deleteCustomers, cancelSelection, addCustomerToDelete, removeCustomerToDelete, aboutToBeDeleted}
+    const hasSelection = () => lines.length > 0
+
+    return {lines, deleteCustomer, deleteCustomers, cancelSelection, addCustomerToDelete, removeCustomerToDelete, aboutToBeDeleted, hasSelection}
 }
 
 export default useCustomerDelete

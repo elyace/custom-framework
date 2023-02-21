@@ -11,3 +11,7 @@
 #customer-list .customer-list__empty {
     text-align: center;
 }
+
+#customer-list table {
+    table-layout: fixed;
+}

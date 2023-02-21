@@ -1,8 +1,8 @@
 import React, {useEffect, useState} from 'react'
+import {usePaginator} from "../useCases/paginator.js";
 import {BsArrowLeftSquare, BsArrowRightSquare} from "react-icons/bs";
 
 import './paginator.css'
-import {usePaginator} from "../useCases/paginator.js";
 
 const Paginator = () => {
 
@@ -18,11 +18,17 @@ const Paginator = () => {
     useEffect( () => {
 
         const id = setTimeout( () => {
-            currentPage !== page && gotToPage(page)
+            currentPage !== page && 0 !== page && !isNaN(page) && gotToPage(page)
         }, 1000 )
 
         return () => clearTimeout(id)
-    }, [page, currentPage] )
+    }, [page] )
+
+    useEffect( () => {
+
+        currentPage !== page && setPage(currentPage)
+
+    }, [currentPage] )
 
     return <div className="d-flex justify-content-between align-items-center" id="paginator">
         <div>
