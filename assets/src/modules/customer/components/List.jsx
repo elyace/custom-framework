@@ -8,6 +8,7 @@ import DeleteSelection from "./Delete.jsx";
 import useCustomerEdit from "../useCases/edit.js";
 
 import './list.css'
+import Paginator from "./Paginator.jsx";
 
 /**
  *
@@ -76,6 +77,7 @@ const CustomerList = () => {
             </tbody>
         </table>
         <DeleteSelection/>
+        <Paginator/>
     </div>
 }
 

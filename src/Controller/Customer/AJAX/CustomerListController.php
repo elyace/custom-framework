@@ -39,6 +39,7 @@ class CustomerListController extends AbstractController
 
         $customerPresenters = CustomerPresenterFactory::makePaginatedCollection(
             $customers,
+            $page,
             $this->getLastPageUrl(),
             $this->getNextPageUrl(),
             $this->getPrevPageUrl()

@@ -14,9 +14,10 @@ final class PaginationAwarePresenter extends AbstractPresenter
      */
     public function __construct(
         private readonly array   $current,
-        private readonly int   $pageCount,
-        private readonly int $total,
-        private readonly string $last,
+        private readonly int     $currentPage,
+        private readonly int     $pageCount,
+        private readonly int     $total,
+        private readonly string  $last,
         private readonly ?string $next,
         private readonly ?string $previous,
     )
@@ -26,9 +27,10 @@ final class PaginationAwarePresenter extends AbstractPresenter
     public function present(): array
     {
         return [
-            'current' => array_map(function (AbstractPresenter $content){
+            'current' => array_map(function (AbstractPresenter $content) {
                 return $content->present();
             }, $this->current),
+            'current_page' => $this->currentPage,
             'next' => $this->next,
             'previous' => $this->previous,
             'total' => $this->total,

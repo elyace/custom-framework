@@ -41,6 +41,7 @@ class CustomerPresenterFactory
 
     public static function makePaginatedCollection(
         CustomerList $customers,
+        int $currentPage,
         string $last,
         ?string $nextPage,
         ?string $prevPage
@@ -50,6 +51,7 @@ class CustomerPresenterFactory
 
         return new PaginationAwarePresenter(
             $collection,
+            $currentPage,
             $customers->pageCount,
             $customers->totalCount,
             $last,

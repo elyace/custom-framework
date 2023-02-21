@@ -4,6 +4,11 @@ import {publish} from "../../../shared/event.js";
 import {add, purge, remove} from "../actions/toDeleteActions.js";
 import {removeCustomer} from "../actions/listActions.js";
 
+/**
+ *
+ * This is responsible for single or multiple customer deleting
+ *
+ */
 const useCustomerDelete = () => {
 
     const lines = useSelector( state => state.customer.toDelete.value )

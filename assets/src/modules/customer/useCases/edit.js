@@ -5,6 +5,12 @@ import {publish, subscribe} from "../../../shared/event.js";
 import React, {useEffect} from "react";
 import {purge} from "../actions/toDeleteActions.js";
 
+/**
+ *
+ * Notice that for this one, we only care about customer editing concern
+ *
+ * @returns {{onEdit: (function(*): *), edit: edit, save: save, customer: *}}
+ */
 const useCustomerEdit = () => {
     const customer = useSelector(state => state.customer.edit.value)
     const dispatch = useDispatch()

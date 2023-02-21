@@ -1,6 +1,6 @@
 import {useDispatch, useSelector} from "react-redux"
 import React, {useEffect} from "react"
-import {addCustomer, initCustomers} from "../actions/listActions.js"
+import {addCustomer, initCustomers, updatePaginator} from "../actions/listActions.js"
 import {publish, subscribe} from "../../../shared/event.js"
 import CustomerList from "../queries/htttp/customerList.js"
 
@@ -9,6 +9,8 @@ import CustomerList from "../queries/htttp/customerList.js"
  * then give it to de component
  *
  * Shown logic are business logic this is important
+ *
+ * @returns {{customers: *}}
  */
 const useCustomerList = () => {
 
@@ -19,7 +21,8 @@ const useCustomerList = () => {
     useEffect(() => {
         const fetchCustomers = async () => {
             const customers = await CustomerList.findAll()
-            dispatch(initCustomers(customers))
+            dispatch(initCustomers(customers.current))
+            dispatch(updatePaginator(customers))
         }
 
         fetchCustomers().then(() => publish('initiated-customer-list'))

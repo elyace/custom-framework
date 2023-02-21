@@ -4,8 +4,14 @@ export const listActions = createSlice({
     name: 'customers',
     initialState: {
         value: [],
-        page: 1,
-        perPage: 10
+        paginator: {
+            last: '',
+            next: '',
+            previous: '',
+            page_count: 0,
+            current_page: 1,
+            total: 0
+        }
     },
     reducers: {
         removeCustomer: (state, action) => {
@@ -16,10 +22,13 @@ export const listActions = createSlice({
         },
         addCustomer: (state, action) => {
             state.value = [...state.value, action.payload]
+        },
+        updatePaginator: (state, action) => {
+            state.paginator = action.payload
         }
     }
 })
 
 export default listActions.reducer
 
-export const { removeCustomer, initCustomers, addCustomer } = listActions.actions
+export const { removeCustomer, initCustomers, addCustomer, updatePaginator } = listActions.actions
