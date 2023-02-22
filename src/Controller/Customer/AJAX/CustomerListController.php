@@ -45,7 +45,8 @@ class CustomerListController extends AbstractController
             $this->getPrevPageUrl()
         );
 
-        return $this->successJsonResponse($customerPresenters->present());
+        $this->setCacheAge(60*60*24);
 
+        return $this->successJsonResponse($customerPresenters->present());
     }
 }

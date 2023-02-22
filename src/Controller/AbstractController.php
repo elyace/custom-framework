@@ -2,6 +2,7 @@
 
 namespace CFM\Controller;
 
+use CFM\Shared\Response\HeaderBag;
 use CFM\Shared\Storage\FlashMessage\FlashMessageManagerInterface;
 use DI\Attribute\Inject;
 use Illuminate\View\Environment;
@@ -12,6 +13,8 @@ use Psr\Http\Message\ServerRequestInterface;
 
 abstract class AbstractController
 {
+
+    use HeaderBag;
 
     private readonly Environment $template;
 
@@ -40,7 +43,7 @@ abstract class AbstractController
 
     protected function successResponse(string $body): ResponseInterface
     {
-        return new Response(200, [], $body);
+        return new Response(200, $this->getHeaders(), $body);
     }
 
     protected function successJsonResponse(array $data): ResponseInterface
