@@ -10,7 +10,7 @@ final class AssetManager implements AssetManagerInterface
         $host = env('VITE_HOST_DEV');
 
         return <<<ASSETS
-        <link rel="stylesheet" type="text/css" href="http://{$host}/src/assets/main.css"/>
+        <link rel="stylesheet" type="text/css" href="http://{$host}/src/web/main.css"/>
         <script type="module" src="http://{$host}/@vite/client"></script>
         <script type="module" src="http://{$host}/src/main.jsx"></script>
 ASSETS;

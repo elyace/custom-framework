@@ -1,0 +1,9 @@
+#customer-list .customer-list__select-actions {
+    margin-top: 10px;
+    display: flex;
+    justify-content: space-between;
+}
+
+#customer-list .customer-list__select-actions button:nth-child(1) {
+    margin-right: 12px;
+}
