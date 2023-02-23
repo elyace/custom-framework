@@ -25,10 +25,13 @@ export const listActions = createSlice({
         },
         updatePaginator: (state, action) => {
             state.paginator = action.payload
+        },
+        updatePaginatorTotal: (state, action) => {
+            state.paginator = {...state.paginator, total: state.paginator.total-action.payload}
         }
     }
 })
 
 export default listActions.reducer
 
-export const { removeCustomer, initCustomers, addCustomer, updatePaginator } = listActions.actions
+export const { removeCustomer, initCustomers, addCustomer, updatePaginator, updatePaginatorTotal} = listActions.actions
