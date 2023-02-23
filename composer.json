@@ -15,7 +15,8 @@
         "symfony/mailer": "^6.2",
         "doctrine/orm": "^2.11.0",
         "doctrine/dbal": "^3.2",
-        "symfony/cache": "^6.2"
+        "symfony/cache": "^6.2",
+        "gedmo/doctrine-extensions": "^3.11"
     },
     "require-dev": {
         "symfony/var-dumper": "^6.2",

@@ -2,7 +2,7 @@ import {instance} from "../../../../shared/axios.js";
 
 class CustomerList {
 
-    static url = '/ajax/customer-list';
+    static url = '/ajax/customers';
 
     static async findAll() {
         return await instance.get(this.url).then(r => r.data.content)
@@ -10,6 +10,10 @@ class CustomerList {
 
     static async fetchWithUrl(url) {
         return await instance.get(url).then(r => r.data.content)
+    }
+
+    static async delete(customerId) {
+        return await instance.delete(this.url + `/${customerId}`)
     }
 }
 

@@ -20,6 +20,7 @@ class CustomerRepository extends EntityRepository implements CustomerListReposit
     public function getList(int $page = 1, int $limit = 10): CustomerList
     {
         $query = $this->createQueryBuilder('c')
+            ->where('c.deletedAt IS NULL')
             ->orderBy('c.id');
 
         $pages = $this->paginate($query, $page, $limit);

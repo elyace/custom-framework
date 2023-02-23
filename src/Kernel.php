@@ -8,12 +8,12 @@ use CFM\Shared\Data\Route;
 use CFM\Shared\Event\EventManager;
 use CFM\Shared\Event\EventManagerInterface;
 use CFM\Shared\Factory\TemplateEnvFactory;
-use DI\Bridge\Slim\Bridge;
 use DI\Container;
 use DI\ContainerBuilder;
 use Psr\Container\ContainerInterface;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
+use Slim\Factory\AppFactory;
 
 class Kernel
 {
@@ -43,7 +43,7 @@ class Kernel
     {
         $this->container = $this->buildContainer();
         $this->initEventListener();
-        $app = Bridge::create($this->container);
+        $app = AppFactory::create();
 
         /** @var Route[] $routes */
         $routes = require_once CONFIG_PATH . '/routes/routes.php';

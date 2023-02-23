@@ -46,11 +46,24 @@ abstract class AbstractController
         return new Response(200, $this->getHeaders(), $body);
     }
 
+    protected function unSuccessResponse(int $status, string $body): ResponseInterface
+    {
+        return new Response($status, $this->getHeaders(), $body);
+    }
+
     protected function successJsonResponse(array $data): ResponseInterface
     {
         return $this->successResponse(json_encode([
             'success' => true,
             'content' => $data
+        ]));
+    }
+
+    protected function unSuccessJsonResponse(array $errors = [], int $status = 400): ResponseInterface
+    {
+        return $this->unSuccessResponse($status, json_encode([
+            'success' => false,
+            'errors' => $errors
         ]));
     }
 }

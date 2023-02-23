@@ -8,6 +8,8 @@ use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\Exception\MissingMappingDriverImplementation;
 use Doctrine\ORM\ORMSetup;
+use Gedmo\SoftDeleteable\Filter\SoftDeleteableFilter;
+use Gedmo\SoftDeleteable\SoftDeleteableListener;
 
 final class EntityManagerFactory
 {
@@ -37,6 +39,7 @@ final class EntityManagerFactory
             paths: array(ROOT_PATH . '/persistence/Entity'),
             isDevMode: 'dev' === env('APP_ENV'),
         );
+        $config->addFilter('soft-deleteable', SoftDeleteableFilter::class);
         $connectionConfig = require CONFIG_PATH . '/doctrine.php';
         $connection = DriverManager::getConnection($connectionConfig, $config);
 
@@ -44,6 +47,14 @@ final class EntityManagerFactory
         {
             $this->manager = new EntityManager($connection, $config);
         }
+
+        $listener = new SoftDeleteableListener();
+        $this->manager->getEventManager()->addEventListener(
+            $listener->getSubscribedEvents(),
+            $listener
+        );
+
+        $this->manager->getFilters()->enable('soft-deleteable');
 
         return $this->manager;
     }
