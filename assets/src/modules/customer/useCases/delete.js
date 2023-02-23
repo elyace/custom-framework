@@ -3,6 +3,7 @@ import {useEffect} from "react";
 import {publish} from "../../../shared/event.js";
 import {add, purge, remove} from "../actions/toDeleteActions.js";
 import {removeCustomer} from "../actions/listActions.js";
+import CustomerList from "../queries/htttp/customerList.js";
 
 /**
  *
@@ -27,14 +28,17 @@ const useCustomerDelete = () => {
         const removedCustomer = customers.find(customer => customer.id === id)
         dispatch(removeCustomer(id))
         publish('removed-customer', removedCustomer)
-
-        // then update backend logic ...
+        CustomerList.delete(id).then(() => publish('removed-customers', [id]))
     }
 
     const deleteCustomers = () => {
         publish('release-delete-btn')
-        lines.forEach( id => dispatch(removeCustomer(id)) )
-        publish('removed-customers', lines)
+        const promise = [];
+        lines.forEach( id => {
+            promise.push(CustomerList.delete(id))
+            dispatch(removeCustomer(id))
+        } )
+        Promise.all(promise).then( () => publish('removed-customers', lines) )
         dispatch(purge())
     }
 

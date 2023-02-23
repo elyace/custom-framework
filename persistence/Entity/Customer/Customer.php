@@ -3,12 +3,18 @@
 namespace Persistence\Entity\Customer;
 
 use Doctrine\ORM\Mapping as ORM;
+use Gedmo\Mapping\Annotation\SoftDeleteable;
+use Gedmo\SoftDeleteable\Traits\SoftDeleteableEntity;
 use Persistence\Repository\Customer\CustomerRepository;
 
 #[ORM\Entity(repositoryClass: CustomerRepository::class)]
 #[ORM\Table(name: 'customers')]
+#[SoftDeleteable(fieldName: 'deletedAt', timeAware: true, hardDelete: true)]
 class Customer
 {
+
+    use SoftDeleteableEntity;
+
     #[ORM\Id]
     #[ORM\Column(type: 'integer')]
     #[ORM\GeneratedValue]
