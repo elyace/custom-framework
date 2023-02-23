@@ -15,7 +15,7 @@ class CustomerListController extends AbstractController
 
     use PageUrlHelper;
 
-    private const AJAX_CUSTOMER_LIST_URL = '/ajax/customer-list';
+    private const AJAX_CUSTOMER_LIST = 'ajax-customer-list';
 
     public function __construct(readonly private ListCustomer $listCustomer){}
 
@@ -33,8 +33,9 @@ class CustomerListController extends AbstractController
             $queryParams['per_page'] ?? 10,
         );
 
+        $route = getRoute(self::AJAX_CUSTOMER_LIST);
         $this->setCurrentPage($page)
-            ->setRoute(self::AJAX_CUSTOMER_LIST_URL)
+            ->setRoute($route->path)
             ->setPageCount($customers->pageCount);
 
         $customerPresenters = CustomerPresenterFactory::makePaginatedCollection(

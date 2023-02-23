@@ -1,6 +1,7 @@
 <?php
 
 use CFM\Kernel;
+use CFM\Shared\Data\Route;
 
 if( !function_exists('env') ) {
     function env(string $key, mixed $default = null)
@@ -40,5 +41,19 @@ if( !function_exists('snake_to_camel') )
     function snake_to_camel($input): string
     {
         return lcfirst(str_replace(' ', '', ucwords(str_replace('_', ' ', $input))));
+    }
+}
+
+if( !function_exists('getRoute') )
+{
+    function getRoute(string $name): ?Route
+    {
+        $configRoutes = require CONFIG_PATH . '/routes/routes.php';
+        $routes = array_filter($configRoutes, function (Route $route) use ($name) {
+
+            return $route->name === $name;
+        });
+
+        return current($routes);
     }
 }

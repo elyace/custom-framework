@@ -6,7 +6,7 @@ use CFM\Controller\Customer\CustomerLoginController;
 use CFM\Controller\HelloController;
 use CFM\Shared\Data\Route;
 
-$customerAjax = require_once __DIR__ . '/ajax/customer.php';
+$customerAjax = require __DIR__ . '/ajax/customer.php';
 
 return [
     Route::make(
