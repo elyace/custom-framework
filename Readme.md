@@ -14,24 +14,24 @@ Always work with ``dev`` branch then make me a new PR if you got any interesting
 
 In the root folder run 
 ````shell
-$ composer install
+composer install
 ````
 for backend dependencies installation
 
 Run the following command to create database (mysql lite) :
 ````shell
-$ php bin/doctrine orm:schema-tool:update --force
+php bin/doctrine orm:schema-tool:update --force
 ````
 
 Then run this command to populate the actual database :
 
 ````shell
-$ php bin/doctrine seeder:run \\Persistence\Seeder\\CustomerSeeder
+php bin/doctrine seeder:run \\Persistence\Seeder\\CustomerSeeder
 ````
 
 Go to web folder and run 
 ````shell
-$ yarn install
+yarn install
 ````
 for frontend dependencies installation
 
@@ -39,13 +39,13 @@ for frontend dependencies installation
 
 Inside web folder run : 
 ````shell
-$ yarn vite
+yarn vite
 ````
 
 Inside public folder run :
 
 ````shell
-$ php -S localhost:8080
+php -S localhost:8080
 ````
 
 Then go to [localhost:8080](http://localhost:8080/customer-list) to see what happen
