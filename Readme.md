@@ -26,7 +26,7 @@ $ php bin/doctrine orm:schema-tool:update --force
 Then run this command to populate the actual database :
 
 ````shell
-$ php bin/doctrine seeder:run
+$ php bin/doctrine seeder:run \\Persistence\Seeder\\CustomerSeeder
 ````
 
 Go to web folder and run 
